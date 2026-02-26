@@ -1,0 +1,17 @@
+<div id='validator'>
+  <form id='form' novalidate>
+    <div class='form_row'>
+      <label for='email_input'>Correo Electrónico:</label>
+      <input type='email' id='email_input' name='correo' required aria-describedby='email_help' />
+      <button type='button' id='send_email_btn' disabled>VALIDAR CORREO</button>
+    </div>
+    <div id='email_help' class='field_error' aria-live='polite'></div>
+    <div class='form_row'>
+      <label for='code_input'>Ingresar Código:</label>
+      <input type='text' id='code_input' name='codigo' maxlength='6' inputmode='numeric' pattern='\d{6}'
+        aria-describedby='code_help' disabled />
+      <button type='button' id='validate_code_btn' disabled>VALIDAR CÓDIGO</button>
+    </div>
+    <div id='code_help class=' field_error' aria-live='polite'></div>
+  </form>
+</div>
