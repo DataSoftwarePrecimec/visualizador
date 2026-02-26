@@ -1,0 +1,150 @@
+/* ========== OVERALL MANUAL BOX ========== */
+.manual-container {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+
+  background-color: #f0f2f5;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+  align-items: flex-start;
+}
+
+/* ========== INDEX BOX (LEFT) ========== */
+.manual-index {
+  width: 240px;
+  flex-shrink: 0;
+
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+
+  padding: 16px;
+  position: sticky;
+  top: 20px;
+  height: fit-content;
+}
+
+.manual-index h3 {
+  margin-top: 0;
+}
+
+.manual-index ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.manual-index li {
+  margin-bottom: 10px;
+}
+
+.manual-index a {
+  text-decoration: none;
+  color: #4285F4;
+}
+
+.manual-index a:hover {
+  text-decoration: underline;
+}
+
+/* ========== CONTENT BOX (RIGHT) ========== */
+.manual-content {
+  flex: 1;
+  max-width: 900px;
+
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+
+  padding: 28px;
+}
+
+/* ========== SECTION BOX ========== */
+.manual-section {
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  display: none;
+  padding: 24px;
+  margin-bottom: 32px;
+  background-color: #fafafa;
+}
+
+.manual-section.active {
+  display: block;
+}
+
+/* ========== SECTION HEADER BOX ========== */
+.manual-section h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+
+  background-color: #4285F4;
+  color: white;
+
+  padding: 12px 16px;
+  border-radius: 6px;
+}
+
+/* ========== PARAGRAPH BOX ========== */
+.manual-section p {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+
+  padding: 14px 16px;
+  margin: 14px 0;
+  border-radius: 6px;
+
+  line-height: 1.6;
+}
+
+/* ========== IMAGE BOX ========== */
+.manual-section img {
+  display: block;
+  max-width: 90%;
+  margin: 18px auto;
+
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 6px;
+}
+
+/* ========== NOTE BOX (SPECIAL LAYOUT) ========== */
+.manual-note {
+  background-color: #fff7cc;
+  border: 1px solid #f4c430;
+  border-radius: 6px;
+
+  padding: 12px 16px;
+  margin: 16px 0;
+
+  line-height: 1.6;
+}
+
+/* Hanging "Nota:" label */
+.manual-note::before {
+  content: "Nota:";
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
+}
+
+/* ========== EXAMPLE BOX ========== */
+.manual-example {
+  background-color: #eef4ff;
+  border: 1px solid #4285F4;
+  border-radius: 6px;
+
+  padding: 12px 16px;
+  margin: 16px 0;
+
+  line-height: 1.6;
+}
+
+.manual-example::before {
+  content: "Ejemplo:";
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
+}
