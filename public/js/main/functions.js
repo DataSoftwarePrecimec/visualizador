@@ -47,6 +47,11 @@ function fill_rows() {
   });
 }
 
+function render_links(linksObj) {
+  if (!linksObj || Object.keys(linksObj).length === 0) return '';
+  return Object.entries(linksObj).map(([label, url]) =>`<a href="${url}" target="_blank" rel="noopener">${label}</a>`).join('<br>');
+}
+
 async function reload_rows(){
   const confirmed = await open_confirm_modal(reload_message);
   if (confirmed) {
