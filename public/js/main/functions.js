@@ -60,6 +60,7 @@ function render_links(linksObj) {
 
 async function download_report(){
   try {
+    toggle_buttons(true)
     const code  = code_field.value.trim();
     const email = email_field.value.trim().toLowerCase();
     const res   = await fetch("/handle_data", {method: "POST", headers: {"Content-Type": "application/json" }, body: JSON.stringify({cmd: 'download_report', code: code, email: email}) });
@@ -80,6 +81,8 @@ async function download_report(){
   } catch (err) {
     console.error("Download error:", err);
     show_message("Error descargando el informe.");
+  }finally{
+    toggle_buttons(false)
   }
 }
 
@@ -168,7 +171,14 @@ function get_value(id) {
   return document.getElementById(id)?.value.trim() || '';
 }
 
+function toggle_buttons(disabled){
+  for (const button of buttons){
+    button.disabled = disabled;
+  }
+}
+
 async function update_rows(){
+  toggle_buttons(true)
   const email = email_field.value.trim().toLowerCase();
   const code  = code_field.value.trim();
   const res   = await fetch('/handle_data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({cmd: 'get_data', email: email, code: code}) });
@@ -178,4 +188,5 @@ async function update_rows(){
     fill_rows()
     update_date()
   }
+  toggle_buttons(false)
 }
