@@ -41,7 +41,7 @@ function fill_rows() {
       <td>${render_links(row.links?.GASTO_QUIRURGICO)}</td>
       <td>${render_links(row.links?.FACTURA)}</td>
       <td>${render_links(row.links?.NOTA)}</td>
-      <td>${render_approval(!!row.links?.HC)}</td>
+      <td>${render_links(row.links?.HC)}</td>
     `;
     table.appendChild(tr);
   });
