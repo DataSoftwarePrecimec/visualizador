@@ -136,6 +136,18 @@ function open_modal(id) {
   document.body.classList.add("modal-open");
 }
 
+//CERRAR CUALQUIER MODAL
+function close_modal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) {
+    return;
+  }
+  modal.classList.remove("show");
+  if (!document.querySelector(".modal.show")) {
+    document.body.classList.remove("modal-open");
+  }
+}
+
 //CERRAR TODOS LOS MODALES
 function close_all_modals() {
   document.querySelectorAll(".modal.show").forEach(m => {
