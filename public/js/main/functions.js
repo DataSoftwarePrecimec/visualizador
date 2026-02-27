@@ -58,45 +58,28 @@ function render_links(linksObj) {
   return Object.entries(linksObj).map(([label, url]) =>`<a href="${url}" target="_blank" rel="noopener">${label}</a>`).join('<br>');
 }
 
-async function reload_rows(){
-  const confirmed = await open_confirm_modal(reload_message);
-  if (confirmed) {
-     main_div.style.display    = 'none';
-    loader_wheel.style.display = 'none';
-    on_code_validated()
-  }
-}
-
 async function download_report(){
-  const confirmed = await open_confirm_modal(download_message);
-  if (confirmed) {
-    try {
-      disable_buttons(true)
-      toggle_table(true)
-      const code = code_field.value.trim();
-      const email = email_field.value.trim().toLowerCase();
-      const res  = await fetch("/handle_data", {method: "POST", headers: {"Content-Type": "application/json" }, body: JSON.stringify({cmd: 'download_report', code: code, email: email}) });
-      const data = await res.json();
-      if (data && data.filedata) {
-        const byteChars   = atob(data.filedata);
-        const byteNumbers = Array.from(byteChars, c => c.charCodeAt(0));
-        const byteArray   = new Uint8Array(byteNumbers);
-        const blob        = new Blob([byteArray], { type: "application/pdf" });
-        const link        = document.createElement("a");
-        link.href         = URL.createObjectURL(blob);
-        link.download     = data.filename;
-        link.click();
-        URL.revokeObjectURL(link.href);
-      } else {
-        show_message("El servidor no devolvió un PDF válido.");
-      }
-    } catch (err) {
-      console.error("Download error:", err);
-      show_message("Error descargando el informe.");
-    } finally {
-      disable_buttons(false)
-      toggle_table(false)
+  try {
+    const code  = code_field.value.trim();
+    const email = email_field.value.trim().toLowerCase();
+    const res   = await fetch("/handle_data", {method: "POST", headers: {"Content-Type": "application/json" }, body: JSON.stringify({cmd: 'download_report', code: code, email: email}) });
+    const data  = await res.json();
+    if (data && data.filedata) {
+      const byteChars   = atob(data.filedata);
+      const byteNumbers = Array.from(byteChars, c => c.charCodeAt(0));
+      const byteArray   = new Uint8Array(byteNumbers);
+      const blob        = new Blob([byteArray], { type: "application/pdf" });
+      const link        = document.createElement("a");
+      link.href         = URL.createObjectURL(blob);
+      link.download     = data.filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    } else {
+      show_message("El servidor no devolvió un PDF válido.");
     }
+  } catch (err) {
+    console.error("Download error:", err);
+    show_message("Error descargando el informe.");
   }
 }
 
