@@ -12,7 +12,7 @@ async function on_code_validated() {
     const res                  = await fetch('/handle_data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({cmd: 'get_data', email: email, code: code}) });
     const data                 = await res.json();
     if (data.status === 'ok') {
-      rows                       = data.data.rows;
+      rows                       = data.rows;
       contract                   = data.contract;
       validator.style.display    = 'none';
       loader_wheel.style.display = 'none';
