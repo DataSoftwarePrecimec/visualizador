@@ -75,4 +75,4 @@ document.getElementById('validate_code_btn').addEventListener('click', async () 
   }
 });
 
-setInterval(update_rows(), 10 * 60 * 1000);
+setInterval(update_rows, 10 * 60 * 1000);
