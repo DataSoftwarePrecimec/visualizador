@@ -124,6 +124,26 @@ function format_name(first, last) {
   return full.toLowerCase().split(' ').filter(word => word.length > 0).map(word => word[0].toUpperCase() + word.slice(1)).join(' ');
 }
 
+//MODALS
+//ABRIR CUALQUIER MODAL
+function open_modal(id) {
+  close_all_modals();
+  const modal = document.getElementById(id);
+  if (!modal){
+    return;
+  };
+  modal.classList.add("show");
+  document.body.classList.add("modal-open");
+}
+
+//CERRAR TODOS LOS MODALES
+function close_all_modals() {
+  document.querySelectorAll(".modal.show").forEach(m => {
+    m.classList.remove("show");
+  });
+  document.body.classList.remove("modal-open");
+}
+
 //MODAL DE MENSAJE
 //MOSTRAR MENSAJE MODAL
 function show_message(msg, color = 'red') {
@@ -140,4 +160,8 @@ function hide_message() {
 //OBTENER VALOR DEL CAMPO
 function get_value(id) {
   return document.getElementById(id)?.value.trim() || '';
+}
+
+function update_rows(){
+  console.log('update rows...')
 }
