@@ -1,4 +1,4 @@
-export const URL = 'https://script.google.com/macros/s/AKfycbyhrBhvF_lhsYXb7ELGsLP4H1hMoILvYnBXKdTFg0xrkPGMl8Rm0r6YEwZ1QZ0uDxRR4A/exec';
+export const URL = 'https://script.google.com/macros/s/AKfycbzYWCeUbrcGwVUB6c1nVPVqScL16Lt01wM7jCj_p3Sq9nLjDX3lS_lCaHjrL0rLadO12g/exec';
 
 export function get_session_code(request, cookieName) {
   const cookieHeader = request.headers.get('Cookie')

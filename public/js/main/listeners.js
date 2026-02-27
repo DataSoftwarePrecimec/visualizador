@@ -11,18 +11,6 @@ window.initializer = async function () {
     console.error('Modal elements NOT FOUND after include');
   }
   try {
-    const res = await fetch('/fetch_holidays', {method: 'POST',headers: {'Content-Type': 'application/json'},body: JSON.stringify({year: today.getFullYear(), code: 'CO'})});
-    holis = await res.json();
-  } catch (err) {
-    console.error('Error loading holidays:', err);
-  }
-  try {
-    const res = await fetch('/fetch_deptos', {method: 'POST',headers: {'Content-Type': 'application/json',}, body: JSON.stringify({request: true})});
-    deptos = await res.json();
-  } catch (err) {
-    console.error('Error loading holidays:', err);
-  }
-  try {
     const response = await fetch('/session_code', { method: 'POST', credentials: 'include' });
     if (!response.ok) console.error('Failed to get session code');
   } catch (err) {
@@ -87,46 +75,4 @@ document.getElementById('validate_code_btn').addEventListener('click', async () 
   }
 });
 
-table.addEventListener('change', e => {
-  const target = e.target;
-  const tr = target.closest('tr');
-  if (!tr) return;
-  if (target.type === 'file') {
-    pdf(target, tr);
-    return;
-  }
-  if (target.classList.contains('approval-select')) {
-    const rejected = target.value.startsWith('RECHAZAR');
-    const grupo = tr.querySelector('.grupo');
-    if (rejected) {
-      grupo.disabled = false;
-      grupo.dataset.manual = '1';
-      fill_group(grupo);
-    } else {
-      reset_incons_row(tr);
-    }
-    return;
-  }
-  if (target.classList.contains('grupo')) {
-    const etiqueta = tr.querySelector('.etiqueta');
-    const descripcion = tr.querySelector('.descripcion');
-    etiqueta.disabled = !target.value;
-    descripcion.disabled = true;
-    if (target.value) {
-      etiqueta.dataset.manual = '1';
-      fill_label(etiqueta, target.value);
-    } else {
-      etiqueta.innerHTML = '';
-    }
-    return;
-  }
-  if (target.classList.contains('etiqueta')) {
-    const descripcion = tr.querySelector('.descripcion');
-    descripcion.disabled = !target.value;
-    descripcion.placeholder = "Describa el motivo del rechazo...";
-    if (target.value) {
-      descripcion.dataset.manual = '1';
-    }
-    return;
-  }
-});
+setInterval(update_rows(), 10 * 60 * 1000);
