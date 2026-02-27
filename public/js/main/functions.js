@@ -20,12 +20,18 @@ async function on_code_validated() {
       ips_title.textContent      = contract[1].toUpperCase()
       contract_title.textContent = contract[2].toUpperCase()
       fill_rows()
+      update_date()
     } else {
       show_message('Error al validar el código: ' + (data.message || 'desconocido'));
     }
   } catch (err) {
     show_message('Error de red: ' + err.message);
   }
+}
+
+function update_date(){
+  date = new Date()
+  date_label.textContent = 'Última actualización: ' + date.toLocaleString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric', hour: 'numeric', minute: '2-digit', hour12: true})
 }
 
 function fill_rows() {
@@ -179,6 +185,14 @@ function get_value(id) {
   return document.getElementById(id)?.value.trim() || '';
 }
 
-function update_rows(){
-  console.log('update rows...')
+async function update_rows(){
+  const email = email_field.value.trim().toLowerCase();
+  const code  = code_field.value.trim();
+  const res   = await fetch('/handle_data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({cmd: 'get_data', email: email, code: code}) });
+  const data  = await res.json();
+  if (data.status === 'ok') {
+    rows = data.rows;
+    fill_rows()
+    update_date()
+  }
 }

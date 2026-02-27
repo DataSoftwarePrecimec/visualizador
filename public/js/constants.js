@@ -28,3 +28,4 @@ const confirm_cancel = document.getElementById('confirm_cancel');
 const validator      = document.getElementById('validator');
 const ips_title      = document.getElementById('ips');
 const contract_title = document.getElementById('contract');
+const date_label     = document.getElementById('last_updated');
