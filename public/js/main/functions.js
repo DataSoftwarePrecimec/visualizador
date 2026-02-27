@@ -178,15 +178,21 @@ function toggle_buttons(disabled){
 }
 
 async function update_rows(){
-  toggle_buttons(true)
-  const email = email_field.value.trim().toLowerCase();
-  const code  = code_field.value.trim();
-  const res   = await fetch('/handle_data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({cmd: 'get_data', email: email, code: code}) });
-  const data  = await res.json();
-  if (data.status === 'ok') {
-    rows = data.rows;
-    fill_rows()
-    update_date()
+  try{
+    toggle_buttons(true)
+    const email = email_field.value.trim().toLowerCase();
+    const code  = code_field.value.trim();
+    const res   = await fetch('/handle_data', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({cmd: 'get_data', email: email, code: code}) });
+    const data  = await res.json();
+    if (data.status === 'ok') {
+      rows = data.rows;
+      fill_rows()
+      update_date()
+    }
+  }catch (err) {
+    console.error("Download error:", err);
+    show_message("Error al actualizar los servicios.");
+  }finally{
+    toggle_buttons(false)
   }
-  toggle_buttons(false)
 }
